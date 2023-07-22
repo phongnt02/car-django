@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+
+{% block import_file_css_js%}
+    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+    <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+{%endblock%}
+
+{% block title %}{{title}}{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8">
+                <h1>Mua ô tô cũ</h1>
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="fa-solid fa-magnifying-glass"></i></span>
+                    <input type="text" class="form-control input-lg search" placeholder="Tìm theo hãng xe,dòng xe hoặc từ khóa (Enter để tìm)" value="">
+                </div>
+                <div class="row mt-4">
+                    <div class="col-md-12">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">Kết quả tìm kiếm</h3>
+                            </div>
+                            <div class="panel-body listCar" id="search-results">
+                                <!-- Kết quả tìm kiếm sẽ được chèn vào đây -->
+                                <div>Không tìm thấy dữ liệu</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+
+                <h1>Bán ô tô cũ</h1>
+                <form method="POST" action="sell/">
+                    <select class="form-control input-lg form-group select-brand" name="select-brand">
+                        <option value="" selected disabled>Chọn hãng xe</option>
+                        {% for brand in listBrand %}
+                            <option value="{{brand.idBrand}}">{{brand.nameBrand}}</option>    
+                        {% endfor %}
+                    </select>
+                    <select class="form-control input-lg form-group select-car" name="select-car">
+                        <option value="" selected disabled>Chọn dòng xe</option>
+                    </select>
+                    <button type="submit" class="btn btn-primary">Bắt đầu</button>
+                </form>
+            </div>
+        </div>
+        <div class="row">
+            <h2>Các xe vừa được đăng bán</h2>
+            <ul class="col-lg-8 slick">
+                {% for car in newCarUpload %}
+                <li class="col-lg-2">
+                    <a href="/detailCar/{{car.idCar}}" style="text-decoration: none;">
+                        <img style="width:226px;height:159px" src="{{car.image}}" alt="Chicago">
+                        <h3 class="nameCar">{{car.nameCar}}</h3>
+                        <div class="kms-driven">
+                            <span>{{ car.kmsDriven}} km |</span>
+                            <span>Tự động</span>
+                        </div>
+                        <div class="price" style="color:red">{{ car.price}} triệu</div>
+                    </a>
+                </li>
+                {%endfor%}
+            </ul>
+            
+        </div>
+
+    </div>
+    <script src="../static/js/Home.js"></script>
+{% endblock %}

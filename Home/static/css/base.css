@@ -1,0 +1,17 @@
+.mt-2 {
+    margin-top: 10px;
+}
+.mt-4 {
+    margin-top: 20px;
+}
+.center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.slick-prev {
+    transform: translate(-120%,350%);
+}
+.slick-next {
+    transform: translate(1980%,-686%);
+}
